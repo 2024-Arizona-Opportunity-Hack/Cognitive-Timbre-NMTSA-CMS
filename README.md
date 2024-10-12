@@ -30,7 +30,7 @@ Brief description of your project and its goals.
 
 ## Setup Instructions
 ```bash
-git clone [your-repo-link]
+git clone https://github.com/opportunity-hack/event-registration.git
 python -m venv cognitive-timbre-venv
 cd Cognitive-Timbre-NMTSA-CMS/nmtsa_cms
 pip install -r requirements.txt
