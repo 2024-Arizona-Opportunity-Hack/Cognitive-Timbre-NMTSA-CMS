@@ -4,17 +4,16 @@
 ## Quick Links
 - [Hackathon Details](https://www.ohack.dev/hack/2024_fall)
 - [Team Slack Channel](https://opportunity-hack.slack.com/app_redirect?channel=cognitive-timbre)
-- [Nonprofit Partner](https://ohack.dev/nonprofit/Neurologic Music Therapy Services of Arizona)
+- [Nonprofit Partner](https://www.ohack.dev/nonprofit/Neurologic%20Music%20Therapy%20Services%20of%20Arizona)
 - [Problem Statement](https://ohack.dev/project/iVVw8DhbmgJhzuZnJXb5)
 
 ## Creator
 @Ryan Woo (on Slack)
 
 ## Team "Cognitive Timbre"
-- [Team Member 1](GitHub profile link)
-- [Team Member 2](GitHub profile link)
-- [Team Member 3](GitHub profile link)
-<!-- Add all team members -->
+- [Sri Ujjwal Reddy Beereddy](https://github.com/sbeeredd04)
+- [Tanay Upreti](https://github.com/code-wolf-byte)
+- [Ryan Woo](https://github.com/rtwoo)
 
 ## Project Overview
 Brief description of your project and its goals.
