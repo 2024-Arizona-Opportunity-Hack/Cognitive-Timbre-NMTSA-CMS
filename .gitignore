@@ -1,0 +1,11 @@
+content/
+*.log
+*.pot
+*.pyc
+__pycache__/
+# db.sqlite3
+media/
+static/
+.DS_Store
+*.mo
+*.env
