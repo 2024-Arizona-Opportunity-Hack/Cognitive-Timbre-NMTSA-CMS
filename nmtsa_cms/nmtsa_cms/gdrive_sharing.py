@@ -76,16 +76,29 @@ def list_perms():
     creds = service_account.Credentials.from_service_account_info(api_key_info)
     serv = build('drive', 'v3', credentials=creds)
 
-    perms = serv.permissions().list(fileId='16HulLskUaWMDMp5iOHgMnuL7s3JsatKY').execute()
+    try:
+        perms = serv.permissions().list(
+            fileId='16HulLskUaWMDMp5iOHgMnuL7s3JsatKY',
+            fields='permissions(id, role, type, emailAddress, displayName)',
+            includePermissionsForView='published'
+        ).execute()
 
-    # print(perms)
-    # Pretty print the permissions
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(perms)
+        # Pretty print the permissions
+        for perm in perms.get('permissions', []):
+            perm_id = perm.get('id')
+            role = perm.get('role')
+            perm_type = perm.get('type')
+            email_address = perm.get('emailAddress', 'N/A')
+            display_name = perm.get('displayName', 'N/A')
+
+            print(f"ID: {perm_id}, Role: {role}, Type: {perm_type}, Email: {email_address}, Display Name: {display_name}")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 
-share_drive_folder('16HulLskUaWMDMp5iOHgMnuL7s3JsatKY', 'kchernov@asu.edu', 'writer')
-
+# share_drive_folder('16HulLskUaWMDMp5iOHgMnuL7s3JsatKY', 'kchernov@asu.edu', 'writer')
+list_perms()
 # Example usage
 # list_drive_files('nmtsa-cms-demo-cb62f7853dc0.json')
