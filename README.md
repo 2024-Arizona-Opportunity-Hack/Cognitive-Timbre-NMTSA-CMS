@@ -7,13 +7,16 @@
 - [Nonprofit Partner](https://www.ohack.dev/nonprofit/Neurologic%20Music%20Therapy%20Services%20of%20Arizona)
 - [Problem Statement](https://ohack.dev/project/iVVw8DhbmgJhzuZnJXb5)
 
-## Creator
-@Ryan Woo (on Slack)
+## Point of Contact
+@rtwoo (on Slack and Discord)
+rtwoo@asu.edu
 
 ## Team "Cognitive Timbre"
 - [Sri Ujjwal Reddy Beereddy](https://github.com/sbeeredd04)
 - [Tanay Upreti](https://github.com/code-wolf-byte)
 - [Ryan Woo](https://github.com/rtwoo)
+- [Aibiike Kubanych kyzy](https://github.com/bikonoai)
+- [Kirill Chernov](https://github.com/Kiri110K)
 
 ## Project Overview
 Brief description of your project and its goals.
@@ -25,9 +28,7 @@ Brief description of your project and its goals.
 - APIs: Google API
 
 
-## Getting Started
-Instructions on how to set up and run your project locally.
-
+## Setup Instructions
 ```bash
 git clone [your-repo-link]
 python -m venv cognitive-timbre-venv
