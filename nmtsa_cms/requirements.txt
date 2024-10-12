@@ -1,6 +1,5 @@
 anyascii==0.3.2
 asgiref==3.8.1
-backports.zoneinfo==0.2.1
 beautifulsoup4==4.12.3
 certifi==2024.8.30
 charset-normalizer==3.4.0
