@@ -19,22 +19,21 @@
 Brief description of your project and its goals.
 
 ## Tech Stack
-- Frontend: 
-- Backend: 
-- Database: 
-- APIs: 
-<!-- Add/modify as needed -->
+- Frontend: HTML/CSS, DTL
+- Backend: Wagtail/Django
+- Database: SQLite
+- APIs: Google API
 
 
 ## Getting Started
 Instructions on how to set up and run your project locally.
 
 ```bash
-# Example commands
 git clone [your-repo-link]
-cd [your-repo-name]
-npm install
-npm start
+python -m venv cognitive-timbre-venv
+cd Cognitive-Timbre-NMTSA-CMS/nmtsa_cms
+pip install -r requirements.txt
+python manage.py runserver
 ```
 
 
