@@ -166,3 +166,4 @@ cython_debug/
 
 # Macs
 .DS_Store
+*.sqlite3
