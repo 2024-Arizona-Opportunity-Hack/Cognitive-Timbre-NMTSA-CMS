@@ -1,66 +1,8 @@
 from django.db import models
 from wagtail.models import Page
-from wagtail.fields import StreamField, RichTextField
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.documents.models import Document
-from wagtail.search import index  # For search indexing
-from wagtail.images.blocks import ImageChooserBlock  # For using images in StreamField
-from wagtail import blocks  # Import blocks for StreamField usage
-from .components.ContentPanelBlock import QualifiedCharitableBlock, CorporateSponsorsBlock
-
-
-class BlogPage(Page):
-    date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('intro'),
-        FieldPanel('body'),
-        FieldPanel('image'),
-    ]
-
-    search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('body'),
-    ]
-
-
-class TherapyPage(Page):
-    date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
-    testimonials = StreamField([
-        ('testimonial', blocks.RichTextBlock()),  # Use blocks.RichTextBlock() for StreamField
-    ], null=True, blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('intro'),
-        FieldPanel('body'),
-        FieldPanel('testimonials'),
-    ]
-
-
-class PostPage(Page):
-    date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('intro'),
-        FieldPanel('body'),
-    ]
-
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel
+from .blocks import TextBlock, ImageBlock, ButtonBlock, EmbedBlock, BlogPostsBlock, VideoPostsBlock, FilesBlock, ContentBlock  # Import your custom blocks
 
 class HomePage(Page):
     image = models.ForeignKey(
@@ -92,75 +34,36 @@ class HomePage(Page):
         help_text="Choose a page to link to for the Call to Action",
     )
 
-    body = RichTextField(blank=True)
-
-    panels = StreamField([
-        ('qualified_charitable', QualifiedCharitableBlock()),
-    ], null=True, blank=True)
+    body = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("image"),
-                FieldPanel("hero_text"),
-                FieldPanel("hero_cta"),
-                FieldPanel("hero_cta_link"),
-            ],
-            heading="Hero section",
-        ),
+        FieldPanel("image"),
+        FieldPanel("hero_text"),
+        FieldPanel("hero_cta"),
+        FieldPanel("hero_cta_link"),
         FieldPanel('body'),
-        FieldPanel('panels'),
     ]
-    
-    def get_context(self, request):
-        context = super().get_context(request)
-        services_page = ServicesPage.objects.live().first()
 
-        if services_page:
-            print(f"DEBUG: Found ServicesPage: {services_page.title}")
-        else:
-            print("DEBUG: No ServicesPage found")
+class AddPage(Page):  # Changed from ServicesPage to AddPage
+    intro = models.CharField(max_length=250, blank=True, help_text="Short intro text")
 
-        context['services_page'] = services_page
-        return context
+    body = StreamField([
+        ('text', TextBlock()),
+        ('image', ImageBlock()),
+        ('button', ButtonBlock()),
+        ('embed', EmbedBlock()),
+        ('blog_posts', BlogPostsBlock()),
+        ('video_posts', VideoPostsBlock()),
+        ('files', FilesBlock()),
+        ('content', ContentBlock()),  # This is where ContentBlock can be added up to 10 times
+    ], null=True, blank=True, max_num=10)  # Limit to 10 ContentBlock entries
 
-
-class ServicesPage(Page):
-    intro = RichTextField(blank=True)
-    body = RichTextField(blank=True)
-
-    blog_section = models.CharField(
-        max_length=250, blank=True, help_text="Blog section intro text"
-    )
-    resources_section = models.CharField(
-        max_length=250, blank=True, help_text="Resources section intro text"
-    )
-    therapy_section = models.CharField(
-        max_length=250, blank=True, help_text="Therapy section intro text"
-    )
-
-    service_name = models.CharField(max_length=250)
-    service_description = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
-        MultiFieldPanel(
-            [
-                FieldPanel("blog_section"),
-                FieldPanel("resources_section"),
-                FieldPanel("therapy_section"),
-            ],
-            heading="Service Sections"
-        ),
-        FieldPanel('service_name'),
-        FieldPanel('service_description'),
-        FieldPanel('body')
+        FieldPanel('body'),
     ]
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['blogposts'] = BlogPage.objects.live().order_by('-date')[:5]
-        context['therapy_posts'] = TherapyPage.objects.live().order_by('-date')[:5]
-        context['document_list'] = Document.objects.all()
-        context['other_posts'] = PostPage.objects.live().order_by('-date')[:5]
         return context
