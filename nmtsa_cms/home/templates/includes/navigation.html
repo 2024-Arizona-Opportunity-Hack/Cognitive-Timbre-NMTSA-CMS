@@ -1,0 +1,17 @@
+{% load static navbar_tags %}
+{% get_navbar_pages as navbar_pages %}
+<nav>
+    <div class="logo">
+        <a href="/"><strong>NMTSA</strong></a>
+    </div>
+    <ul>
+        {% for page in navbar_pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <a href="{% url 'wagtailadmin_logout' %}" class="book-now-btn">Logout</a>
+    {% else %}
+        <a href="{% url 'wagtailadmin_login' %}" class="book-now-btn">Login</a>
+    {% endif %}
+</nav>
