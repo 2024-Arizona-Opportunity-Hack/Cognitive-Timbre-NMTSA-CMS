@@ -8,6 +8,25 @@
 {% block body_class %}{% endblock %}
 
 {% block content %}
+    <!-- Navbar Section -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/"><strong>NMTSA</strong></a>
+            </div>
+            <ul>
+                {% for page in navbar_pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated %}
+                <a href="{% url 'wagtailadmin_logout' %}" class="book-now-btn">Logout</a>
+            {% else %}
+                <a href="{% url 'wagtailadmin_login' %}" class="book-now-btn">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <div class="hero-section" style="position: relative;">
         <!-- Background Image -->
