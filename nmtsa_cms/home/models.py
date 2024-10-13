@@ -1,9 +1,10 @@
 from django.db import models
 from wagtail.models import Page
 from wagtail.fields import StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.fields import RichTextField
 from .blocks import TextBlock, ImageBlock, ButtonBlock, EmbedBlock, BlogPostsBlock, VideoPostsBlock, FilesBlock, ContentBlock  # Import your custom blocks
-
+from .components.ContentPanelBlock import QualifiedCharitableBlock
 class HomePage(Page):
     image = models.ForeignKey(
         "wagtailimages.Image",
@@ -34,16 +35,25 @@ class HomePage(Page):
         help_text="Choose a page to link to for the Call to Action",
     )
 
-    body = models.TextField(blank=True)
+    body = RichTextField(blank=True)
+
+    panels = StreamField([
+        ('qualified_charitable', QualifiedCharitableBlock()),
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel("image"),
-        FieldPanel("hero_text"),
-        FieldPanel("hero_cta"),
-        FieldPanel("hero_cta_link"),
+        MultiFieldPanel(
+            [
+                FieldPanel("image"),
+                FieldPanel("hero_text"),
+                FieldPanel("hero_cta"),
+                FieldPanel("hero_cta_link"),
+            ],
+            heading="Hero section",
+        ),
         FieldPanel('body'),
+        FieldPanel('panels'),
     ]
-
 class AddPage(Page):  # Changed from ServicesPage to AddPage
     intro = models.CharField(max_length=250, blank=True, help_text="Short intro text")
 

@@ -1,0 +1,14 @@
+[
+  {
+    "model": "home.homepage",
+    "pk": 3,
+    "fields": {
+      "image": 1,
+      "hero_text": "Neurologic Music Therapy Services of Arizona",
+      "hero_cta": "",
+      "hero_cta_link": null,
+      "body": "<p data-block-key=\"ihr9t\">Neurologic Music Therapy Services of Arizona’s (NMTSA) vision is to unleash the unique potential of individuals with disabilities. NMTSA has provided services to persons with neurologic impairments/differences (ages 18 months to 90+ years of age) and their families in the greater Phoenix area since 1982. </p>",
+      "panels": "[{\"type\": \"qualified_charitable\", \"value\": {\"title\": \"Unannounced Event #1\", \"image\": 2, \"description\": \"<p data-block-key=\\\"9amu6\\\">Music Lessons for the Elderly</p>\", \"cta_text\": \"Music Lessons for the Elderly\", \"cta_link\": null, \"background_color\": \"\"}, \"id\": \"b76f5528-48c6-4924-b761-429dc8d96043\"}, {\"type\": \"qualified_charitable\", \"value\": {\"title\": \"Community Music Event\", \"image\": 3, \"description\": \"<p data-block-key=\\\"dcuga\\\">Community Music Event</p>\", \"cta_text\": \"Community Music Event\", \"cta_link\": null, \"background_color\": \"\"}, \"id\": \"0e81a5d6-ecdb-48fd-b341-1befb20d21eb\"}, {\"type\": \"qualified_charitable\", \"value\": {\"title\": \"Corporate Sponsors\", \"image\": 6, \"description\": \"<p data-block-key=\\\"pv19x\\\"><b>Sponsor new and innovative clinical programs</b></p>\", \"cta_text\": \"Sponsor clinical and educational scholarships\", \"cta_link\": null, \"background_color\": \"\"}, \"id\": \"f6723f48-abb9-4f05-98c6-0c25b9a895ac\"}]"
+    }
+  }
+]

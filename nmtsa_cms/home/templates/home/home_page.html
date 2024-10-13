@@ -47,7 +47,6 @@
 
                 <!-- Block-specific content -->
                 {% if block.block_type == 'qualified_charitable' %}
-                    <p>Special content for Qualified Charitable Organization Tax Credit</p>
                 {% elif block.block_type == 'corporate_sponsors' %}
                     <ul>
                         {% for item in block.value.items %}
