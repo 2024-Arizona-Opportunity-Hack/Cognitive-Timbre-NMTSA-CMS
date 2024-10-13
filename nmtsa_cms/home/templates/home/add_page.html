@@ -1,57 +1,34 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-add_page{% endblock %}
+{% block body_class %}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
     <h1>{{ page.title }}</h1>
-    <p>{{ page.intro }}</p>  <!-- Displaying intro text -->
+    <p>{{ page.intro }}</p>
 
     <div class="dynamic-sections">
         {% for block in page.body %}
-            <!-- Display block type and value for debugging -->
             <div class="debug-info">
-                <h3>Block Information:</h3>
                 <p class="hide-paragraph">Block Type: {{ block.block_type }}</p>
-                <p class="hide-paragraph">Block Value: {{ block.value }}</p> <!-- Output block value directly -->
+                <p class="hide-paragraph">Block Value: {{ block.value }}</p>
             </div>
 
             {% if block.block_type == "text" %}
                 <div class="text-block">
-                    <h2>{{ block.value|richtext }}</h2>  <!-- Rich text content -->
+                    <h2>{{ block.value|richtext }}</h2>
                 </div>
 
             {% elif block.block_type == "image" %}
                 <div class="image-block">
                     <img src="{{ block.value.image.url }}" alt="{{ block.value.caption }}">
-                    
                 </div>
 
             {% elif block.block_type == "content" %}
                 <div class="nested-content-block">
-                    <p class="hide-paragraph">Debug: Entering nested content block</p>
                     {% for nested_block in block.value %}
-                        <div class="debug-info">
-                            <h3 class="hide-paragraph">Nested Block Information:</h3>
-                            <p class="hide-paragraph">Nested Block Type: {{ nested_block.block_type }}</p>
-                            <p class="hide-paragraph">Nested Block Value: {{ nested_block.value }}</p>  <!-- Output nested block value directly -->
-                        </div>
-
-                        {% if nested_block.block_type == "heading" %}
-                            <h2>{{ nested_block.value }}</h2>
-
-                        {% elif nested_block.block_type == "paragraph" %}
-                            <p>{{ nested_block.value|richtext }}</p>
-
-                        {% elif nested_block.block_type == "image" %}
-                            <p class="hide-paragraph">Debug: Nested image block found</p>
-                            <p class="hide-paragraph">Image URL: {{ nested_block.value.url }}</p>
-                            <img src="{{ nested_block.value.url }}" alt="Image">
-                            {% if nested_block.value.caption %}
-                                <p class="hide-paragraph">{{ nested_block.value.caption }}</p>
-                            {% endif %}
-                        {% endif %}
+                        {% include_block nested_block %}
                     {% endfor %}
                 </div>
             {% endif %}

@@ -9,5 +9,9 @@
             <li><a href="{{ page.url }}">{{ page.title }}</a></li>
         {% endfor %}
     </ul>
-    <a href="#" class="book-now-btn">Login</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'wagtailadmin_logout' %}" class="book-now-btn">Logout</a>
+    {% else %}
+        <a href="{% url 'wagtailadmin_login' %}" class="book-now-btn">Login</a>
+    {% endif %}
 </nav>
