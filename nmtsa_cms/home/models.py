@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.models import Page, ParentalKey, Orderable
+from wagtail.models import Page
 from wagtail.fields import RichTextField
 
 # import MultiFieldPanel:
@@ -13,7 +13,6 @@ import nmtsa_cms.gdrive_sharing as gdrive
 from home.File import File
 
 class HomePage(Page):
-    # add the Hero section of HomePage:
     image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -24,7 +23,8 @@ class HomePage(Page):
     )
     hero_text = models.CharField(
         blank=True,
-        max_length=255, help_text="Write an introduction for the site"
+        max_length=255,
+        help_text="Write an introduction for the site"
     )
     hero_cta = models.CharField(
         blank=True,
@@ -44,7 +44,10 @@ class HomePage(Page):
 
     body = RichTextField(blank=True)
 
-    # modify your content_panels:
+    panels = StreamField([
+        ('qualified_charitable', QualifiedCharitableBlock()),
+    ], null=True, blank=True)
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [

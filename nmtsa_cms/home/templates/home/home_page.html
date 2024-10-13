@@ -1,19 +1,64 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailuserbar wagtailimages_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nmtsa_cms.css' %}">
+{% endblock %}
+
+{% block body_class %}{% endblock %}
 
 {% block content %}
-    <div>
-        <h1>{{ page.title }}</h1>
-        {% image page.image fill-480x320 %}
-        <p>{{ page.hero_text }}</p>
-        {% if page.hero_cta_link %}
-            <a href="{% pageurl page.hero_cta_link %}">
-                {% firstof page.hero_cta page.hero_cta_link.title %}
-            </a>
+    <!-- Hero Section -->
+    <div class="hero-section" style="position: relative;">
+        <!-- Background Image -->
+        {% if page.image %}
+        <div class="hero-image">
+            {% image page.image fill-1920x1080 as hero_img %}
+            <img src="{{ hero_img.url }}" alt="{{ page.title }}">
+        </div>
         {% endif %}
+        
+        <!-- Text Overlay -->
+        <div class="hero-overlay">
+            <h1>{{ page.hero_text }}</h1>
+            {% if page.hero_cta_link %}
+                <a href="{% pageurl page.hero_cta_link %}" class="hero-cta">
+                    {% firstof page.hero_cta page.hero_cta_link.title %}
+                </a>
+            {% endif %}
+        </div>
     </div>
 
-  {{ page.body|richtext }}
+    <!-- Page Body Content -->
+    <div class="content">
+        {{ page.body|richtext }}
+    </div>
+
+    <!-- Panels -->
+    <div class="panels">
+        {% for block in page.panels %}
+            <div class="content-panel">
+                <h2>{{ block.value.title }}</h2>
+                {% if block.value.image %}
+                    {% image block.value.image fill-480x320 as img %}
+                    <img src="{{ img.url }}" alt="{{ block.value.title }}">
+                {% endif %}
+                <p>{{ block.value.description|richtext }}</p>
+
+                <!-- Block-specific content -->
+                {% if block.block_type == 'qualified_charitable' %}
+                {% elif block.block_type == 'corporate_sponsors' %}
+                    <ul>
+                        {% for item in block.value.items %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if block.value.cta_text and block.value.cta_link %}
+                    <a href="{{ block.value.cta_link.url }}" class="btn">{{ block.value.cta_text }}</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
