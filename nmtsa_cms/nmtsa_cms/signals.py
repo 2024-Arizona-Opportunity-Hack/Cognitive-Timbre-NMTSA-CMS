@@ -33,24 +33,24 @@ def role_change_handler(sender, instance, action, pk_set, **kwargs):
             # else:
             #     print("API call failed for removed group")
 
-    elif action == "post_clear":
-        print('All groups cleared')
-        # Handle clearing of all groups here
-        # Example: Make an external API call for clearing all groups
-        # api_url = "https://external-api.example.com/role-change"
-        # payload = {
-        #     "role_name": "all",
-        #     "action": "cleared"
-        # }
-        # headers = {
-        #     "Content-Type": "application/json",
-        #     "Authorization": "Bearer YOUR_API_TOKEN"
-        # }
-        # response = requests.post(api_url, json=payload, headers=headers)
-        # if response.status_code == 200:
-        #     print("API call successful for clearing all groups")
-        # else:
-        #     print("API call failed for clearing all groups")
+    # elif action == "post_clear":
+    #     print('All groups cleared')
+    #     # Handle clearing of all groups here
+    #     # Example: Make an external API call for clearing all groups
+    #     # api_url = "https://external-api.example.com/role-change"
+    #     # payload = {
+    #     #     "role_name": "all",
+    #     #     "action": "cleared"
+    #     # }
+    #     # headers = {
+    #     #     "Content-Type": "application/json",
+    #     #     "Authorization": "Bearer YOUR_API_TOKEN"
+    #     # }
+    #     # response = requests.post(api_url, json=payload, headers=headers)
+    #     # if response.status_code == 200:
+    #     #     print("API call successful for clearing all groups")
+    #     # else:
+    #     #     print("API call failed for clearing all groups")
     
     elif action == "post_add":
         added_groups = Group.objects.filter(pk__in=pk_set)
