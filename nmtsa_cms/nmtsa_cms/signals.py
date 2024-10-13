@@ -30,7 +30,7 @@ def gdrive_page_save_handler(sender, instance, created, **kwargs):
             for user in users:
                 for file in instance.g_drive_page_files.all():
                     print(f'Sharing file {file.file.file_id} with {user.email}')
-                    # gdrive.share_item(file.file.file_id, user.email)
+                    gdrive.share_item(file.file.file_id, user.email)
 
 @receiver(m2m_changed, sender=User.groups.through)
 def role_change_handler(sender, instance, action, pk_set, **kwargs):
@@ -42,17 +42,19 @@ def role_change_handler(sender, instance, action, pk_set, **kwargs):
             print(f'Group removed: {group.name}')
 
             # Iterate over files that a group has access to
-            for file in test_dict.get(group.name, []):
-                
-                # Get permissions for the file
-                permissions = list_perms(file)
+            gdrive_pages = GDrivePage.objects.filter(g_drive_groups__group=group)
+            for gdrive_page in gdrive_pages:
+                for file in gdrive_page.g_drive_page_files.all():
+                    print(f'Unsharing file {file.file.file_id} with {instance.email}')
+                    # Get permissions for the file
+                    permissions = gdrive.list_perms(file.file.file_id)
 
-                # pprint.pprint(permissions)
+                    print(permissions)
 
-                permissions = filter(lambda x: x.get('emailAddress') == instance.email, permissions.get('permissions', []))
-                for perm in permissions:
-                    print(f"Removing permission {perm['id']} for file {file} {instance.email}")
-                    unshare(perm['id'], file)
+                    permissions = filter(lambda x: x.get('emailAddress') == instance.email, permissions.get('permissions', []))
+                    for perm in permissions:
+                        print(f"Removing permission {perm['id']} for file {file.file.file_id} {instance.email}")
+                        gdrive.unshare(perm['id'], file.file.file_id)
 
 
 
@@ -63,9 +65,11 @@ def role_change_handler(sender, instance, action, pk_set, **kwargs):
             print(f'Group added: {group.name}')
 
             # Iterate over files that a group has access to
-            for item in test_dict.get(group.name, []):
-                
-                share_item(item, instance.email)
+            gdrive_pages = GDrivePage.objects.filter(g_drive_groups__group=group)
+            for gdrive_page in gdrive_pages:
+                for file in gdrive_page.g_drive_page_files.all():
+                    print(f'Sharing file {file.file.file_id} with {instance.email}')
+                    gdrive.share_item(file.file.file_id, instance.email)
             
 
 
