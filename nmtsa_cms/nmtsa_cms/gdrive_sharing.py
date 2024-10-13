@@ -121,7 +121,7 @@ def list_perms(file_id):
 # list_perms()
 # Example usage
 # list_drive_files('nmtsa-cms-demo-cb62f7853dc0.json')
-folder_folders()
-print('----------------------------------')
-folder_files()
-print('----------------------------------')
+# folder_folders()
+# print('----------------------------------')
+# folder_files()
+# print('----------------------------------')

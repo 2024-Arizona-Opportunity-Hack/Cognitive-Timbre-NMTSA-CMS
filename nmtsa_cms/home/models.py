@@ -94,8 +94,7 @@ class Folder(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
 class File(models.Model):
     name = models.CharField(max_length=255)
     file = models.FileField(upload_to='files/')
@@ -109,6 +108,10 @@ class File(models.Model):
         return self.name
 
 class GDrivePage(Page):
+
+    folder = Folder.objects.create(name="Mock Folder")
+    File.objects.create(name="Mock File 1", file="path/to/mockfile1.txt", folder=folder)
+    File.objects.create(name="Mock File 2", file="path/to/mockfile2.txt", folder=folder)
     intro = models.CharField(max_length=250, blank=True, help_text="Short intro text")
     selected_files = models.ManyToManyField(File, related_name="pages", blank=True)  # Allowing selection of multiple files
 
