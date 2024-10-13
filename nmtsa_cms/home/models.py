@@ -1,14 +1,13 @@
+# models.py
+
 from django.db import models
-
 from wagtail.models import Page
-from wagtail.fields import RichTextField
-
-# import MultiFieldPanel:
+from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-
+from wagtail.fields import RichTextField
+from .components.ContentPanelBlock import QualifiedCharitableBlock, CorporateSponsorsBlock
 
 class HomePage(Page):
-    # add the Hero section of HomePage:
     image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -19,7 +18,8 @@ class HomePage(Page):
     )
     hero_text = models.CharField(
         blank=True,
-        max_length=255, help_text="Write an introduction for the site"
+        max_length=255,
+        help_text="Write an introduction for the site"
     )
     hero_cta = models.CharField(
         blank=True,
@@ -39,7 +39,11 @@ class HomePage(Page):
 
     body = RichTextField(blank=True)
 
-    # modify your content_panels:
+    panels = StreamField([
+        ('qualified_charitable', QualifiedCharitableBlock()),
+        ('corporate_sponsors', CorporateSponsorsBlock()),
+    ], null=True, blank=True)
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -51,5 +55,5 @@ class HomePage(Page):
             heading="Hero section",
         ),
         FieldPanel('body'),
+        FieldPanel('panels'),
     ]
-

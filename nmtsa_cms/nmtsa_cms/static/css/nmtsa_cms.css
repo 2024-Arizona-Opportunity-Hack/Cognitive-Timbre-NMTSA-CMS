@@ -1,87 +1,68 @@
-/* Base styles for the navbar */
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  background-color: #FDF0E6; /* Creme background color */
+}
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  background-color: #f5f8fa;
-  border-radius: 50px; /* Makes the navbar rounded */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds shadow to the navbar */
+  padding: 20px 40px;
+  background-color: transparent; /* No background color for the navbar */
 }
 
-/* Menu items styling */
+.logo a {
+  font-size: 32px; /* Increase font size for the logo */
+  font-weight: 900; /* Make the logo bolder */
+  color: #121470; /* Deep purple color */
+  text-decoration: none;
+}
+
 nav ul {
-  display: flex;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  gap: 40px; /* Add more space between links */
 }
 
 nav ul li {
-  margin-left: 20px;
+  display: inline;
 }
 
-nav ul li a {
+nav a {
   text-decoration: none;
-  color: #4a5568;
-  font-size: 16px;
-  padding: 10px 20px;
-  transition: color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-  border-radius: 30px; /* Round the link items */
-}
-
-nav ul li a:hover {
-  color: #7b61ff; /* Purple hover color */
-  box-shadow: 0 5px 15px rgba(123, 97, 255, 0.3); /* Shadow effect on hover */
-}
-
-/* Right side (Sign In, Get Started) */
-nav .right-side {
-  display: flex;
-  align-items: center;
-}
-
-nav .right-side a {
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-nav .right-side .sign-in {
-  color: #4a5568;
-}
-
-nav .right-side .get-started {
-  background-color: #7b61ff;
-  color: white;
+  color: #121470; /* Deep purple color for links */
   font-weight: bold;
+  font-size: 16px; /* Adjust font size if needed */
 }
 
-nav .right-side .get-started:hover {
-  background-color: #6248cc;
+.book-now-btn {
+  padding: 10px 20px;
+  background-color: #E87363; /* Coral pink for the button */
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.book-now-btn:hover {
+  background-color: #d46457; /* Slightly darker hover effect */
+}
 
-  nav .right-side {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+footer {
+  background-color: #121470; /* Deep purple footer background */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
 
-  nav ul li {
-    margin-left: 0;
-  }
-
-  nav .right-side a {
-    margin-left: 0;
-    margin-top: 10px;
-  }
+footer p {
+  margin: 0;
 }
