@@ -14,12 +14,11 @@
         <button onclick="onApiLoad()">Add File</button>
         <h1>{{ page.title }}</h1>
         <p>{{ page.hero_text }}</p>
-        {% comment %} {% if page.hero_cta_link %}
-            <a href="{% pageurl page.hero_cta_link %}">
-                {% firstof page.hero_cta page.hero_cta_link.title %}
-            </a>
-        {% endif %} {% endcomment %}
-        <iframe src="https://drive.google.com/file/d/1cYgQTL5yCbUhnjp19aN28Y8rO4dVXX7i/preview" width="640" height="480" allow="autoplay"></iframe>
+        {% for file in page.g_drive_page_files.all %}
+            <p>{{ file.file.name }}</p>
+            <p>{{ file.file.url }}</p>
+            <iframe src="{{ file.file.url }}" width="640" height="480" allow="autoplay"></iframe>
+        {% endfor %}
     </div>
 
   {{ page.body|richtext }}

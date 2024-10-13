@@ -9,6 +9,8 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPan
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django import forms
+import nmtsa_cms.gdrive_sharing as gdrive
+from home.File import File
 
 class HomePage(Page):
     # add the Hero section of HomePage:
@@ -56,13 +58,7 @@ class HomePage(Page):
         FieldPanel('body'),
     ]
     
-class File(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    url = models.URLField(max_length=200)
-    
-    def __str__(self):
-        return self.name
+
     
 class FileChooserViewSet(ChooserViewSet):
     # The model can be specified as either the model class or an "app_label.model_name" string;
@@ -74,6 +70,13 @@ class FileChooserViewSet(ChooserViewSet):
     choose_another_text = "Choose another file"
     edit_item_text = "Edit this file"
     # form_fields = ["name", "url"]  # fields to show in the "Create" tab
+
+    def get_object_list(self):
+        # Refresh the files before returning the queryset
+        print("Refreshing files")
+        gdrive.refresh_files()
+        
+        return File.objects.all()
 
 file_chooser_viewset = FileChooserViewSet("file_chooser")
     

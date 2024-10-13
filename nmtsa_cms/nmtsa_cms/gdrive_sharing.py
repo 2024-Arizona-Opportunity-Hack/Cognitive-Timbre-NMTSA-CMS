@@ -2,6 +2,8 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import json
 import pprint
+from home.File import File
+
 __MAIN_FOLDER_NAME = '16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'
 
 
@@ -9,6 +11,14 @@ __MAIN_FOLDER_NAME = '16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'
 with open('nmtsa-cms-demo-cb62f7853dc0.json', 'r') as file:
     api_key_info = json.load(file)
 
+def refresh_files():
+    File.objects.all().delete()
+
+    # Repopulate with mock files
+    files = get_drive_files()
+
+    for file in files:
+        File.objects.create(name=file["name"], url="https://drive.google.com/file/d/"+file["id"]+"/preview")
 
 def folder_folders(folder_id=__MAIN_FOLDER_NAME):
     # Authenticate and construct the service
