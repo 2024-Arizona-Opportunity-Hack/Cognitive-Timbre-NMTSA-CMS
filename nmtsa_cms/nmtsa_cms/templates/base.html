@@ -18,7 +18,6 @@
         {% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        {# Link to the external CSS file #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/nmtsa_cms.css' %}">
 
         {% block extra_css %}
@@ -32,18 +31,26 @@
             </div>
             <ul>
                 <li><a href="#">About Us</a></li>
-                <li><a href="#">Services</a></li>
+        
+                {% if services_page %}
+                    <li>
+                        <a href="{% pageurl services_page %}">Services</a>
+                    </li>
+                {% else %}
+                    <li><a href="#">Services</a></li>
+                    <p>Services</p>
+                {% endif %}
+        
                 <li><a href="#">Get Involved</a></li>
                 <li><a href="#">Support Us</a></li>
             </ul>
             <a href="#" class="book-now-btn">Login</a>
-        </nav>
+        </nav>        
 
 
         {% wagtailuserbar %}
         {% block content %}{% endblock %}
 
-        {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/nmtsa_cms.js' %}"></script>
 
         {% block extra_js %}
