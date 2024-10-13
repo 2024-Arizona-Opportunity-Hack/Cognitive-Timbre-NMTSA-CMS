@@ -24,7 +24,7 @@ def refresh_files():
     # Create new files that don't already exist in the model
     for file in drive_files:
         if file["name"] not in existing_files:
-            File.objects.create(name=file["name"], url="https://drive.google.com/file/d/"+file["id"]+"/preview")
+            File.objects.create(name=file["name"], file_id=file["id"])
 
 def folder_folders(folder_id=__MAIN_FOLDER_NAME):
     # Authenticate and construct the service

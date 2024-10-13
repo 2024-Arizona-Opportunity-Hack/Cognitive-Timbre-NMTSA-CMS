@@ -10,8 +10,15 @@
         <p>{{ page.hero_text }}</p>
         {% for file in page.g_drive_page_files.all %}
             <p>{{ file.file.name }}</p>
-            <iframe src="{{ file.file.url }}" width="640" height="480" allow="autoplay"></iframe>
+            <iframe src="https://drive.google.com/file/d/{{ file.file.file_id }}/preview" width="640" height="480" allow="autoplay"></iframe>
         {% endfor %}
+        
+        <h2>Groups with Access</h2>
+        <ul>
+            {% for group in page.g_drive_groups.all %}
+                <li>{{ group.group.name }}</li>
+            {% endfor %}
+        </ul>
     </div>
 
   {{ page.body|richtext }}

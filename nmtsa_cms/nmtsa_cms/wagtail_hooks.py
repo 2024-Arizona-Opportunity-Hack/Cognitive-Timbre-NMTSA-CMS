@@ -10,15 +10,16 @@ import nmtsa_cms.gdrive_sharing as gdrive
 @hooks.register("register_admin_viewset")
 def register_viewset():
     return file_chooser_viewset
-        
 
-@hooks.register('before_edit_page')
-def before_edit_page(request, parent_page, page_class=None):
+@hooks.register('before_edit_user')
+def before_edit_user(request, parent_page, page_class=None):
     # Use a custom create view for the AwesomePage model
+    print(page_class)
+    print(request)
     print(parent_page.__class__)
-    if parent_page.__class__ == GDrivePage:
-        print('Editing a GDrivePage')
-        # refresh_files()
+    # if parent_page.__class__ == GDrivePage:
+    #     print('Editing a GDrivePage')
+    #     # refresh_files()
         
         
 

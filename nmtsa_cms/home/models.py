@@ -12,6 +12,7 @@ from django import forms
 import nmtsa_cms.gdrive_sharing as gdrive
 from home.File import File
 from home.components.ContentPanelBlock import QualifiedCharitableBlock
+from django.contrib.auth.models import Group
 
 class HomePage(Page):
     image = models.ForeignKey(
@@ -61,9 +62,6 @@ class HomePage(Page):
         ),
         FieldPanel('body'),
     ]
-    
-
-    
 class FileChooserViewSet(ChooserViewSet):
     model = "home.File"
 
@@ -82,7 +80,7 @@ class FileChooserViewSet(ChooserViewSet):
         return queryset
 
 file_chooser_viewset = FileChooserViewSet("file_chooser")
-    
+
 class GDrivePage(Page):
     # add the Hero section of HomePage:
     hero_text = models.CharField(
@@ -107,13 +105,6 @@ class GDrivePage(Page):
 
     body = RichTextField(blank=True)
     
-    user_groups = models.ManyToManyField(
-        to='auth.Group',
-        blank=True,
-        related_name='gdrive_pages',
-        help_text="Select user groups that can access this page"
-    )
-    
     # modify your content_panels:
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -125,12 +116,26 @@ class GDrivePage(Page):
             heading="Hero section",
         ),
         FieldPanel('body'),
-        FieldPanel('user_groups', widget=forms.CheckboxSelectMultiple()),
         MultipleChooserPanel(
             'g_drive_page_files', label="GDrive File", chooser_field_name="file"
         ),
+        InlinePanel('g_drive_groups', label="GDrive Groups"),
     ]
-            
+
+class GDriveGroup(Orderable):
+    id = models.AutoField(primary_key=True)
+    page = ParentalKey(GDrivePage, on_delete=models.CASCADE, related_name='g_drive_groups')
+    group = models.ForeignKey(
+        'auth.Group',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    panels = [
+        FieldPanel('group'),
+    ]
+
 class GDrivePageFile(Orderable):
     id = models.AutoField(primary_key=True)
     page = ParentalKey(GDrivePage, on_delete=models.CASCADE, related_name='g_drive_page_files')
