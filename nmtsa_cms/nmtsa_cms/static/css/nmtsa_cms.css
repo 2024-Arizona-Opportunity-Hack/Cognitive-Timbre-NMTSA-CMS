@@ -83,6 +83,7 @@ footer {
     background-color: #f8f9fa;
     padding: 20px 40px;
     font-family: Arial, sans-serif;
+    margin-top: 50px;
 }
 
 .footer-container {
@@ -324,12 +325,6 @@ body {
   padding: 20px;
 }
 
-/* Typography Styles */
-h1, h2, h3 {
-  font-family: 'Georgia', serif;
-  color: #121470;
-  margin-bottom: 1rem;
-}
 
 h1 {
   font-size: 3rem;
@@ -349,7 +344,7 @@ h3 {
 
 p {
   margin-bottom: 1.5rem;
-  color: #555; /* Softer text color for better readability */
+  color: #261b4f; /* Softer text color for better readability */
 }
 
 /* Dynamic Content Sections */
