@@ -1,0 +1,13 @@
+{% load static navbar_tags %}
+{% get_navbar_pages as navbar_pages %}
+<nav>
+    <div class="logo">
+        <a href="/"><strong>NMTSA</strong></a>
+    </div>
+    <ul>
+        {% for page in navbar_pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="#" class="book-now-btn">Login</a>
+</nav>

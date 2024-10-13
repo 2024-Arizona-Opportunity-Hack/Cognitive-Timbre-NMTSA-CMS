@@ -25,27 +25,10 @@
     </head>
 
     <body>
-        <nav>
-            <div class="logo">
-                <a href="#"><strong>NMTSA</strong></a>
-            </div>
-            <ul>
-                <li><a href="#">About Us</a></li>
-        
-                {% if services_page %}
-                    <li>
-                        <a href="{% pageurl add_page %}">Services</a>
-                    </li>
-                {% else %}
-                    <li><a href="#">Services</a></li>
-                {% endif %}
+        {% block navigation%}{% endblock navigation%}
+        {% include 'includes/navigation.html' %}
 
-                <li><a href="#">Get Involved</a></li>
-                <li><a href="#">Support Us</a></li>
-            </ul>
-            <a href="#" class="book-now-btn">Login</a>
-        </nav>        
-
+        {% block body_class %}{% endblock %}
 
         {% wagtailuserbar %}
         {% block content %}{% endblock %}
@@ -53,6 +36,6 @@
         <script type="text/javascript" src="{% static 'js/nmtsa_cms.js' %}"></script>
 
         {% block extra_js %}
-        {% endblock %}
+        {% endblock %} 
     </body>
 </html>
