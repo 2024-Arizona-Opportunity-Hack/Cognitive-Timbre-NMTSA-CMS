@@ -480,3 +480,99 @@ ul, ol {
 li {
   margin-bottom: 10px; /* Space between list items for better readability */
 }
+
+
+
+
+/* Contact Us Section Styling */
+.contact-section {
+    /* background-color: #d2648c; /* Light beige background */
+    padding: 2rem; 
+    border-radius: 20px; /* Increased roundness */
+    max-width: 800px;
+    margin: 2rem auto;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.contact-section h2 {
+    color: #2D2D71; /* Dark blue for the heading */
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Form Styling */
+.contact-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    width: 48%;
+    margin-bottom: 1.5rem;
+}
+
+.form-group.full-width {
+    width: 100%;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #CCC;
+    border-radius: 20px; /* Increased roundness */
+    outline: none;
+    transition: border 0.3s ease;
+    background-color: #FFF;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #FF6F52; /* Orange border on focus */
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button Styling */
+.btn {
+    background-color: #FF6F52; /* Orange button background */
+    color: #FFF;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px; /* More rounded button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #E65C3E; /* Darker orange on hover */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .form-group {
+        width: 100%;
+    }
+}
