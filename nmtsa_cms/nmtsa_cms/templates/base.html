@@ -40,6 +40,11 @@
                 <li><a href="">Contact</a></li>
             </ul>
         </nav>
+        {% if request.user.is_authenticated %}
+            <p>Welcome, {{ request.user.username }}!</p>
+        {% else %}
+            <p>Welcome, Guest!</p>
+        {% endif %}
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
