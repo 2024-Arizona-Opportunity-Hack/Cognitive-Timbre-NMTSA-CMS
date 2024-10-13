@@ -85,3 +85,16 @@ nav .right-side .get-started:hover {
     margin-top: 10px;
   }
 }
+
+
+html, body { padding: 10px; }
+
+smart-tree {
+	 width: 300px;
+  }
+  
+@media only screen and (max-width: 700px) {
+  smart-tree {
+	 width: 100%;
+  }
+}
