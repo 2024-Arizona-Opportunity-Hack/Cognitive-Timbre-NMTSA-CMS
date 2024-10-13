@@ -8,103 +8,80 @@
 {% block body_class %}{% endblock %}
 
 {% block content %}
-    <!-- Navbar Section -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <a href="/"><strong>NMTSA</strong></a>
-            </div>
-            <ul>
-                {% for page in navbar_pages %}
-                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-            </ul>
-            {% if user.is_authenticated %}
-                <a href="{% url 'wagtailadmin_logout' %}" class="book-now-btn">Logout</a>
-            {% else %}
-                <a href="{% url 'wagtailadmin_login' %}" class="book-now-btn">Login</a>
-            {% endif %}
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-section" style="position: relative;">
-        <!-- Background Image -->
-        {% if page.image %}
-        <div class="hero-image">
-            {% image page.image fill-1920x1080 as hero_img %}
-            <img src="{{ hero_img.url }}" alt="{{ page.title }}">
-        </div>
-        {% endif %}
-        
-        <!-- Text Overlay -->
-        <div class="hero-overlay">
-            <h1>{{ page.hero_text }}</h1>
-            {% if page.hero_cta_link %}
-                <a href="{% pageurl page.hero_cta_link %}" class="hero-cta">
-                    {% firstof page.hero_cta page.hero_cta_link.title %}
-                </a>
-            {% endif %}
-        </div>
-    </div>
-
-    <!-- Page Body Content -->
-    <div class="content">
-        {{ page.body|richtext }}
-    </div>
-
-    <!-- Panels -->
-    <div class="panels">
-        {% for block in page.panels %}
-            <div class="content-panel">
-                <h2>{{ block.value.title }}</h2>
-                {% if block.value.image %}
-                    {% image block.value.image fill-480x320 as img %}
-                    <img src="{{ img.url }}" alt="{{ block.value.title }}">
+    <!-- Home Container with Semi-Transparent Background -->
+    <div class="home-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <!-- Guitar Image -->
+                {% if page.image %}
+                <div class="hero-image">
+                    {% image page.image fill-480x320 as hero_img %}
+                    <img src="{{ hero_img.url }}" alt="Guitar Image" class="img-fluid">
+                </div>
                 {% endif %}
-                <p>{{ block.value.description|richtext }}</p>
+                <!-- Text Content -->
+                <div class="hero-text">
+                    <h1>Neurologic Music Therapy Services of Arizona</h1>
+                    {% if page.hero_cta_link %}
+                        <a href="{% pageurl page.hero_cta_link %}" class="hero-cta">
+                            {% firstof page.hero_cta page.hero_cta_link.title %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
 
-                <!-- Block-specific content -->
-                {% if block.block_type == 'qualified_charitable' %}
-                {% elif block.block_type == 'corporate_sponsors' %}
-                    <ul>
-                        {% for item in block.value.items %}
-                            <li>{{ item }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+        <!-- Page Body Content -->
+        <div class="content">
+            {{ page.body|richtext }}
+        </div>
 
-                {% if block.value.cta_text and block.value.cta_link %}
-                    <a href="{{ block.value.cta_link.url }}" class="btn">{{ block.value.cta_text }}</a>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
-    <!-- Contact Us Section -->
-    <div class="contact-section">
-        <h2>Contact Us</h2>
-        <p>Interested in working together? Fill out some info and we will be in touch shortly. We can’t wait to hear from you!</p>
+        <!-- Panels Section -->
+        <div class="panels">
+            {% for block in page.panels %}
+                <div class="content-panel">
+                    <h2>{{ block.value.title }}</h2>
+                    {% if block.value.image %}
+                        {% image block.value.image fill-480x320 as img %}
+                        <img src="{{ img.url }}" alt="{{ block.value.title }}">
+                    {% endif %}
+                    <p>{{ block.value.description|richtext }}</p>
 
-        <form action="{% pageurl page %}#contact" method="POST" class="contact-form">
-            <div class="form-group">
-                <label for="first-name">First Name (required)</label>
-                <input type="text" id="first-name" name="first-name" required>
-            </div>
-            <div class="form-group">
-                <label for="last-name">Last Name (required)</label>
-                <input type="text" id="last-name" name="last-name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email (required)</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message (required)</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn">Send</button>
-            </div>
-        </form>
+                    {% if block.value.cta_text and block.value.cta_link %}
+                        <a href="{{ block.value.cta_link.url }}" class="btn">{{ block.value.cta_text }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Contact Us Section -->
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <p>Interested in working together? Fill out some info and we will be in touch shortly.</p>
+
+            <form action="{% pageurl page %}#contact" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="first-name">First Name (required)</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name (required)</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email (required)</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message (required)</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Send</button>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock content %}
