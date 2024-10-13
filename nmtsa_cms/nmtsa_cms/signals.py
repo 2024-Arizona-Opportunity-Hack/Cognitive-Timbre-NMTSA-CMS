@@ -8,9 +8,9 @@ from nmtsa_cms.gdrive_sharing import *
 import pprint
 
 test_dict = {
-    'Moderators': ['16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'],
-    'Editors': ['16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'],
-    'admin': ['16HulLskUaWMDMp5iOHgMnuL7s3JsatKY']
+    'Moderators': [],
+    'Editors': [],
+    'admin': [],
 }
 
 @receiver(m2m_changed, sender=User.groups.through)
