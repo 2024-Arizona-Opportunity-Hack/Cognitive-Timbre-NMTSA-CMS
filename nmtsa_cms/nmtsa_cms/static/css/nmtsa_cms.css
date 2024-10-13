@@ -83,6 +83,7 @@ footer {
     background-color: #f8f9fa;
     padding: 20px 40px;
     font-family: Arial, sans-serif;
+    margin-top: 50px;
 }
 
 .footer-container {
@@ -203,7 +204,7 @@ footer {
 /* General styling for the body content */
 .content {
     font-size: 1.5rem;
-    color: #333;
+    color: #240857;
     line-height: 1.8;
     max-width: 950px; /* Control maximum width for readability */
     margin: 50px auto; /* Center the content and add top-bottom spacing */
@@ -217,6 +218,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 20px;
+    margin-bottom: 50px;
     gap: 20px;
 }
 
