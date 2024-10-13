@@ -2,10 +2,41 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import json
 import pprint
+__MAIN_FOLDER_NAME = '16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'
+
 
 # Load the API key from the file
 with open('nmtsa-cms-demo-cb62f7853dc0.json', 'r') as file:
     api_key_info = json.load(file)
+
+
+def folder_folders(folder_id=__MAIN_FOLDER_NAME):
+    # Authenticate and construct the service
+    credentials = service_account.Credentials.from_service_account_info(api_key_info)
+    service = build('drive', 'v3', credentials=credentials)
+    
+    # Query to get all folders within the given folder_id
+    query = f"'{folder_id}' in parents and mimeType = 'application/vnd.google-apps.folder'"
+    results = service.files().list(q=query, fields="nextPageToken, files(id, name)").execute()
+    folders = results.get('files')
+    
+    pprint.pprint(folders)
+
+    return folders
+
+def folder_files(folder_id=__MAIN_FOLDER_NAME):
+    # Authenticate and construct the service
+    credentials = service_account.Credentials.from_service_account_info(api_key_info)
+    service = build('drive', 'v3', credentials=credentials)
+    
+    # Query to get all mp4 files within the given folder_id
+    query = f"'{folder_id}' in parents and mimeType = 'video/mp4'"
+    results = service.files().list(q=query, fields="nextPageToken, files(id, name)").execute()
+    files = results.get('files')
+    
+    pprint.pprint(files)
+
+    return files
 
 def list_drive_files():
     # Authenticate and construct the service
@@ -83,10 +114,14 @@ def list_perms(file_id):
         includePermissionsForView='published'
     ).execute()
 
-__MAIN_FOLDER_NAME = '16HulLskUaWMDMp5iOHgMnuL7s3JsatKY'
+
 
 
 # share_drive_folder('1mXbY3yFf66EIYSKhq7sjSylUDyCH-4KF', 'tupreti@asu.edu', 'writer')
 # list_perms()
 # Example usage
 # list_drive_files('nmtsa-cms-demo-cb62f7853dc0.json')
+folder_folders()
+print('----------------------------------')
+folder_files()
+print('----------------------------------')
