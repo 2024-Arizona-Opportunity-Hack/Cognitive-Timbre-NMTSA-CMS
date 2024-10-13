@@ -67,6 +67,7 @@
         <p>Interested in working together? Fill out some info and we will be in touch shortly. We can’t wait to hear from you!</p>
 
         <form action="{% pageurl page %}#contact" method="POST" class="contact-form">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="first-name">First Name (required)</label>
                 <input type="text" id="first-name" name="first-name" required>
