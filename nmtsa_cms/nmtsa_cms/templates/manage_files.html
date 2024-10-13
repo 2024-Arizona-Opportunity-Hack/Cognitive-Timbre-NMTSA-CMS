@@ -5,30 +5,8 @@
 
     <h3 id="tree_label">My Documents</h3>
     <ul role="tree" aria-labelledby="tree_label">
-        {% for category, items in documents.items %}
-            <li role="treeitem" aria-expanded="false" aria-selected="false">
-                <span>{{ category }}</span>
-                <ul role="group">
-                    {% for item in items %}
-                        {% if item.subitems %}
-                            <li role="treeitem" aria-expanded="false" aria-selected="false">
-                                <span>{{ item.name }}</span>
-                                <ul role="group">
-                                    {% for subitem in item.subitems %}
-                                        <li role="treeitem" aria-selected="false" class="doc">{{ subitem }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% else %}
-                            <li role="treeitem" aria-selected="false" class="doc">{{ item.name }}</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </li>
+        {% for item in files %}
+            <li role="treeitem" aria-selected="false" class="doc">{{ item.name }}</li>
         {% endfor %}
     </ul>
-
-    <p>
-        <label>File or Folder Selected: <input id="last_action" type="text" size="15" readonly=""></label>
-    </p>
 {% endblock %}

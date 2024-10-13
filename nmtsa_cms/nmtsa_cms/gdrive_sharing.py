@@ -119,7 +119,6 @@ def list_perms(file_id):
 
 # share_drive_folder('1mXbY3yFf66EIYSKhq7sjSylUDyCH-4KF', 'tupreti@asu.edu', 'writer')
 # list_perms()
-# Example usage
 # list_drive_files('nmtsa-cms-demo-cb62f7853dc0.json')
 # folder_folders()
 # print('----------------------------------')
