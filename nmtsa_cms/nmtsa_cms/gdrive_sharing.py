@@ -34,7 +34,7 @@ def folder_files(folder_id=__MAIN_FOLDER_NAME):
     results = service.files().list(q=query, fields="nextPageToken, files(id, name)").execute()
     files = results.get('files')
     
-    pprint.pprint(files)
+    # pprint.pprint(files)
 
     return files
 

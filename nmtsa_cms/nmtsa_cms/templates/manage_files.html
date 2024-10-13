@@ -5,8 +5,17 @@
 
     <h3 id="tree_label">My Documents</h3>
     <ul role="tree" aria-labelledby="tree_label">
+        <form action="/manage-files/submit/" method="post">
+        {% csrf_token %}
         {% for item in files %}
-            <li role="treeitem" aria-selected="false" class="doc">{{ item.name }}</li>
+            <li role="treeitem" aria-selected="false" class="doc">
+                <input type="checkbox" name="file_checkbox" value="{{ item.name }}">
+                {{ item.name }}
+            </li>
         {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
     </ul>
+    
+        
 {% endblock %}

@@ -16,6 +16,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('manage-files/', views.manage_files_view, name='manage_files'),
+    path('manage-files/submit/', views.manage_files_submit, name='manage_files_submit'),
 
     path('accounts/', include('allauth.urls')),
 ]
