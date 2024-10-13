@@ -488,3 +488,16 @@ ul, ol {
 li {
   margin-bottom: 10px; /* Space between list items for better readability */
 }
+
+
+html, body { padding: 10px; }
+
+smart-tree {
+	 width: 300px;
+  }
+  
+@media only screen and (max-width: 700px) {
+  smart-tree {
+	 width: 100%;
+  }
+}

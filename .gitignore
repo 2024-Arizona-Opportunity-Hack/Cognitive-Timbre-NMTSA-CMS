@@ -1,6 +1,8 @@
 <<<<<<< Updated upstream
 # yt-dlp downloads
 content/
+export*.json
+nmtsa*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

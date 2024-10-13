@@ -44,8 +44,30 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'django.contrib.sites',
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "nmtsa_cms.apps.NMTSAAppConfig",
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'FETCH_USERINFO' : True
+    }
+}
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -56,7 +78,39 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        "APP": {
+            "client_id": "871757466989-l24vn04gjbua2b6f9odf40l6c92s1tth.apps.googleusercontent.com",
+            "secret": "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",
+            "key": ""
+        },
+        # These are provider-specific settings that can only be
+        # listed here:
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
+}
 
 ROOT_URLCONF = "nmtsa_cms.urls"
 
@@ -178,3 +232,8 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_ONLY = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'

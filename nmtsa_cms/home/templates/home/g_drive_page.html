@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+    <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+    <script type="text/javascript">
+        var GOOGLE_CLIENT_ID = '{{ GOOGLE_CLIENT_ID }}';
+        var DEVELOPER_KEY = 'AIzaSyDWZbfXkYqNNcQV7Fh-axUazNI0gdyTVR4';
+    </script>
+    <script type="text/javascript" src="{% static 'js/google_picker.js' %}"></script>
+    <div>
+        <button onclick="onApiLoad()">Add File</button>
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.hero_text }}</p>
+        {% comment %} {% if page.hero_cta_link %}
+            <a href="{% pageurl page.hero_cta_link %}">
+                {% firstof page.hero_cta page.hero_cta_link.title %}
+            </a>
+        {% endif %} {% endcomment %}
+        <iframe src="https://drive.google.com/file/d/1cYgQTL5yCbUhnjp19aN28Y8rO4dVXX7i/preview" width="640" height="480" allow="autoplay"></iframe>
+    </div>
+
+  {{ page.body|richtext }}
+{% endblock content %}
