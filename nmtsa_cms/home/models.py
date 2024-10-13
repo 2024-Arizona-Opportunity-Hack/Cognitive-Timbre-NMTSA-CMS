@@ -1,16 +1,17 @@
 from django.db import models
 
-from wagtail.models import Page
+from wagtail.models import Page, Orderable, ParentalKey, StreamField
 from wagtail.fields import RichTextField
 
 # import MultiFieldPanel:
 from wagtail.admin.viewsets.chooser import ChooserViewSet
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPanel, InlinePanel
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django import forms
 import nmtsa_cms.gdrive_sharing as gdrive
 from home.File import File
+from home.components.ContentPanelBlock import QualifiedCharitableBlock
 
 class HomePage(Page):
     image = models.ForeignKey(
@@ -64,22 +65,21 @@ class HomePage(Page):
 
     
 class FileChooserViewSet(ChooserViewSet):
-    # The model can be specified as either the model class or an "app_label.model_name" string;
-    # using a string avoids circular imports when accessing the StreamField block class (see below)
     model = "home.File"
 
     icon = "file"
     choose_one_text = "Choose a file"
     choose_another_text = "Choose another file"
     edit_item_text = "Edit this file"
-    # form_fields = ["name", "url"]  # fields to show in the "Create" tab
 
     def get_object_list(self):
         # Refresh the files before returning the queryset
         print("Refreshing files")
         gdrive.refresh_files()
         
-        return File.objects.all()
+        queryset = File.objects.all()
+
+        return queryset
 
 file_chooser_viewset = FileChooserViewSet("file_chooser")
     
@@ -107,6 +107,13 @@ class GDrivePage(Page):
 
     body = RichTextField(blank=True)
     
+    user_groups = models.ManyToManyField(
+        to='auth.Group',
+        blank=True,
+        related_name='gdrive_pages',
+        help_text="Select user groups that can access this page"
+    )
+    
     # modify your content_panels:
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -118,8 +125,9 @@ class GDrivePage(Page):
             heading="Hero section",
         ),
         FieldPanel('body'),
+        FieldPanel('user_groups', widget=forms.CheckboxSelectMultiple()),
         MultipleChooserPanel(
-            'g_drive_page_files', label="GDrive files", chooser_field_name="file"
+            'g_drive_page_files', label="GDrive File", chooser_field_name="file"
         ),
     ]
             

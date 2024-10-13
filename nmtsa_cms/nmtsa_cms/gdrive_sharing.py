@@ -12,13 +12,19 @@ with open('nmtsa-cms-demo-cb62f7853dc0.json', 'r') as file:
     api_key_info = json.load(file)
 
 def refresh_files():
-    File.objects.all().delete()
+    existing_files = {file.name: file for file in File.objects.all()}
+    drive_files = get_drive_files()
 
-    # Repopulate with mock files
-    files = get_drive_files()
+    # Delete files that no longer exist in the drive
+    drive_file_names = {file["name"] for file in drive_files}
+    for file_name in list(existing_files.keys()):
+        if file_name not in drive_file_names:
+            existing_files[file_name].delete()
 
-    for file in files:
-        File.objects.create(name=file["name"], url="https://drive.google.com/file/d/"+file["id"]+"/preview")
+    # Create new files that don't already exist in the model
+    for file in drive_files:
+        if file["name"] not in existing_files:
+            File.objects.create(name=file["name"], url="https://drive.google.com/file/d/"+file["id"]+"/preview")
 
 def folder_folders(folder_id=__MAIN_FOLDER_NAME):
     # Authenticate and construct the service

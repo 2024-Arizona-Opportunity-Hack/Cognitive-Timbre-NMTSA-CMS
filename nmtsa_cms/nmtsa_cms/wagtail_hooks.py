@@ -12,12 +12,13 @@ def register_viewset():
     return file_chooser_viewset
         
 
-# @hooks.register('before_edit_page')
-# def before_edit_page(request, parent_page, page_class=None):
-#     # Use a custom create view for the AwesomePage model
-#     if parent_page.__class__ == GDrivePage:
-#         print('Editing a GDrivePage')
-#         refresh_files()
+@hooks.register('before_edit_page')
+def before_edit_page(request, parent_page, page_class=None):
+    # Use a custom create view for the AwesomePage model
+    print(parent_page.__class__)
+    if parent_page.__class__ == GDrivePage:
+        print('Editing a GDrivePage')
+        # refresh_files()
         
         
 
