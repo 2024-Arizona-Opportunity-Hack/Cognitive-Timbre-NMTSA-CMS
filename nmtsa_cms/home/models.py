@@ -6,7 +6,7 @@ from wagtail.documents.models import Document
 from wagtail.search import index  # For search indexing
 from wagtail.images.blocks import ImageChooserBlock  # For using images in StreamField
 from wagtail import blocks  # Import blocks for StreamField usage
-from .components.ContentPanelBlock import QualifiedCharitableBlock, CorporateSponsorsBlock
+from .components.ContentPanelBlock import QualifiedCharitableBlock
 
 
 class BlogPage(Page):

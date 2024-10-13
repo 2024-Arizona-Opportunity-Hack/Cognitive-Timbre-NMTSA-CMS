@@ -16,7 +16,17 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color: transparent; /* No background color for the navbar */
+  background-color: rgba(253, 240, 230, 0.9); /* Semi-transparent background */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+/* Add a class for when the navbar is scrolled */
+nav.scrolled {
+  background-color: #FDF0E6; /* Solid background when scrolled */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
 }
 
 .logo a {
