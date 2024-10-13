@@ -10,6 +10,13 @@
 
     <div class="dynamic-sections">
         {% for block in page.body %}
+            <!-- Display block type and value for debugging -->
+            <div class="debug-info">
+                <h3>Block Information:</h3>
+                <p class="hide-paragraph">Block Type: {{ block.block_type }}</p>
+                <p class="hide-paragraph">Block Value: {{ block.value }}</p> <!-- Output block value directly -->
+            </div>
+
             {% if block.block_type == "text" %}
                 <div class="text-block">
                     <h2>{{ block.value|richtext }}</h2>  <!-- Rich text content -->
@@ -18,79 +25,35 @@
             {% elif block.block_type == "image" %}
                 <div class="image-block">
                     <img src="{{ block.value.image.url }}" alt="{{ block.value.caption }}">
-                    {% if block.value.caption %}
-                        <p>{{ block.value.caption }}</p>  <!-- Optional image caption -->
-                    {% endif %}
-                </div>
-
-            {% elif block.block_type == "button" %}
-                <div class="button-block">
-                    <a href="{{ block.value.button_url }}" class="btn btn-primary">{{ block.value.button_text }}</a>
-                </div>
-
-            {% elif block.block_type == "embed" %}
-                <div class="embed-block">
-                    <h3>{{ block.value.embed_title }}</h3>  <!-- Optional embed title -->
-                    <iframe src="{{ block.value.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-
-            {% elif block.block_type == "blog_posts" %}
-                <div class="blog-posts-block">
-                    <h2>Blog Posts</h2>
-                    <ul>
-                        {% for blog in block.value.blog_posts %}
-                            <li>
-                                <h3>{{ blog.title }}</h3>
-                                <p>{{ blog.intro }}</p>
-                                <p><a href="{{ blog.link }}">{{ blog.date }}</a></p>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-            {% elif block.block_type == "video_posts" %}
-                <div class="video-posts-block">
-                    <h2>Videos</h2>
-                    <ul>
-                        {% for video in block.value.videos %}
-                            <li>
-                                <h3>{{ video.embed_title }}</h3>
-                                <iframe src="{{ video.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-            {% elif block.block_type == "files" %}
-                <div class="files-block">
-                    <h2>Files</h2>
-                    <ul>
-                        {% for file in block.value.files %}
-                            <li>
-                                <a href="{{ file.file.url }}">{{ file.description }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    
                 </div>
 
             {% elif block.block_type == "content" %}
                 <div class="nested-content-block">
-                    <!-- Nested content rendering, useful for custom sections -->
+                    <p class="hide-paragraph">Debug: Entering nested content block</p>
                     {% for nested_block in block.value %}
+                        <div class="debug-info">
+                            <h3 class="hide-paragraph">Nested Block Information:</h3>
+                            <p class="hide-paragraph">Nested Block Type: {{ nested_block.block_type }}</p>
+                            <p class="hide-paragraph">Nested Block Value: {{ nested_block.value }}</p>  <!-- Output nested block value directly -->
+                        </div>
+
                         {% if nested_block.block_type == "heading" %}
                             <h2>{{ nested_block.value }}</h2>
+
                         {% elif nested_block.block_type == "paragraph" %}
                             <p>{{ nested_block.value|richtext }}</p>
+
                         {% elif nested_block.block_type == "image" %}
+                            <p class="hide-paragraph">Debug: Nested image block found</p>
+                            <p class="hide-paragraph">Image URL: {{ nested_block.value.url }}</p>
                             <img src="{{ nested_block.value.url }}" alt="Image">
-                        {% elif nested_block.block_type == "embed" %}
-                            <iframe src="{{ nested_block.value.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                        {% elif nested_block.block_type == "document" %}
-                            <a href="{{ nested_block.value.url }}">{{ nested_block.value.title }}</a>
+                            {% if nested_block.value.caption %}
+                                <p class="hide-paragraph">{{ nested_block.value.caption }}</p>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
-
             {% endif %}
         {% endfor %}
     </div>

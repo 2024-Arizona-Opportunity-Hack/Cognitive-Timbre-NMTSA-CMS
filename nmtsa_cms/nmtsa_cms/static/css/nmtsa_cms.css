@@ -79,6 +79,50 @@ footer p {
 
 
 
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 40px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo a {
+    font-size: 1.8rem;
+    color: #1a2a7b;
+    text-decoration: none;
+}
+
+.footer-info {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-info h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.footer-location, .footer-contact {
+    font-size: 0.9rem;
+    color: #000;
+}
+
+.footer-contact a {
+    color: #d65a50;
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+
 
 
 
@@ -258,4 +302,9 @@ footer p {
     .panels {
         padding: 0 20px; /* Less padding for smaller screens */
     }
+}
+
+
+.hide-paragraph {
+  display: none;
 }

@@ -33,6 +33,10 @@
         {% wagtailuserbar %}
         {% block content %}{% endblock %}
 
+        <!-- Footer inclusion -->
+        {% block footer %}{% endblock footer %}
+        {% include 'includes/footer.html' %}
+
         <script type="text/javascript" src="{% static 'js/nmtsa_cms.js' %}"></script>
 
         {% block extra_js %}
