@@ -1,11 +1,14 @@
 from django.db import models
 
-from wagtail.models import Page
+from wagtail.models import Page, ParentalKey, Orderable
 from wagtail.fields import RichTextField
 
 # import MultiFieldPanel:
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.viewsets.chooser import ChooserViewSet
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPanel
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django import forms
 
 class HomePage(Page):
     # add the Hero section of HomePage:
@@ -53,6 +56,27 @@ class HomePage(Page):
         FieldPanel('body'),
     ]
     
+class File(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    url = models.URLField(max_length=200)
+    
+    def __str__(self):
+        return self.name
+    
+class FileChooserViewSet(ChooserViewSet):
+    # The model can be specified as either the model class or an "app_label.model_name" string;
+    # using a string avoids circular imports when accessing the StreamField block class (see below)
+    model = "home.File"
+
+    icon = "file"
+    choose_one_text = "Choose a file"
+    choose_another_text = "Choose another file"
+    edit_item_text = "Edit this file"
+    # form_fields = ["name", "url"]  # fields to show in the "Create" tab
+
+file_chooser_viewset = FileChooserViewSet("file_chooser")
+    
 class GDrivePage(Page):
     # add the Hero section of HomePage:
     hero_text = models.CharField(
@@ -76,7 +100,7 @@ class GDrivePage(Page):
     )
 
     body = RichTextField(blank=True)
-
+    
     # modify your content_panels:
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -88,10 +112,18 @@ class GDrivePage(Page):
             heading="Hero section",
         ),
         FieldPanel('body'),
+        MultipleChooserPanel(
+            'g_drive_page_files', label="GDrive files", chooser_field_name="file"
+        ),
     ]
-    
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['GOOGLE_CLIENT_ID'] = settings.SOCIALACCOUNT_PROVIDERS['google']['APP']['client_id']
-        print('context:', context)
-        return context
+            
+class GDrivePageFile(Orderable):
+    id = models.AutoField(primary_key=True)
+    page = ParentalKey(GDrivePage, on_delete=models.CASCADE, related_name='g_drive_page_files')
+    file = models.ForeignKey(
+        'home.File', on_delete=models.CASCADE, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('file'),
+    ]

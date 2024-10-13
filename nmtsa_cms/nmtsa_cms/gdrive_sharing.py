@@ -38,20 +38,21 @@ def folder_files(folder_id=__MAIN_FOLDER_NAME):
 
     return files
 
-def list_drive_files():
+def get_drive_files():
     # Authenticate and construct the service
     credentials = service_account.Credentials.from_service_account_info(api_key_info)
     service = build('drive', 'v3', credentials=credentials)
     
     # Call the Drive v3 API
-    results = service.files().list(fields="nextPageToken, files(id, name)").execute()
+    results = service.files().list(fields="nextPageToken, files(id, name, webContentLink)").execute()
     items = results.get('files', [])
     
-    if not items:
-        print('No files found.')
-    else:
-        for item in items:
-            print(f"{item['name']} ({item['id']})")
+    return items
+    # if not items:
+    #     print('No files found.')
+    # else:
+    #     for item in items:
+    #         print(f"{item['name']} ({item['id']})")
 
 
 def share_item(item_id, email, role='reader'):
