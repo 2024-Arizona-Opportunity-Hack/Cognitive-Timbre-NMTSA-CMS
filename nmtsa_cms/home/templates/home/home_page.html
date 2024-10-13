@@ -17,31 +17,31 @@
 
     {{ page.body|richtext }}
 
-    <div class="panels">
+    <div class="cards-container">
         {% for block in page.panels %}
-            <div class="content-panel">
-                <div class="individual-panel">
-                <h2>{{ block.value.title }}</h2>
+            <div class="card" style="border-color: {{ block.value.background_color|default:"#E5E5E5" }};">
                 {% if block.value.image %}
                     {% image block.value.image fill-480x320 as img %}
                     <img src="{{ img.url }}" alt="{{ block.value.title }}">
                 {% endif %}
-                <p>{{ block.value.description|richtext }}</p>
-                {% if block.block_type == 'qualified_charitable' %}
-                    <p>Special content for Qualified Charitable Organization Tax Credit</p>
-                {% elif block.block_type == 'corporate_sponsors' %}
-                    <ul>
-                        {% for item in block.value.items %}
-                            <li>{{ item }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                {% if block.value.cta_text and block.value.cta_link %}
-                    <a href="{{ block.value.cta_link.url }}" class="btn">{{ block.value.cta_text }}</a>
-                {% endif %}
+                <div class="individual-panel">
+                    <h2>{{ block.value.title }}</h2>
+                    <div class="price">$100.00</div> <!-- Hardcoded pricing example -->
+                    <div class="subscription-details">Every month</div>
+                    <p>{{ block.value.description|richtext }}</p>
+                    {% if block.block_type == 'qualified_charitable' %}
+                        {% if block.value.cta_text and block.value.cta_link %}
+                            <a href="{{ block.value.cta_link.url }}" class="btn" style="background-color: {{ block.value.background_color }}; border-color: {{ block.value.background_color }};">
+                                {{ block.value.cta_text }}
+                            </a>
+                        {% else %}
+                            <a href="#" class="btn" style="background-color: {{ block.value.background_color }}; border-color: {{ block.value.background_color }};">
+                                Learn  More
+                            </a>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
     </div>
-
 {% endblock content %}

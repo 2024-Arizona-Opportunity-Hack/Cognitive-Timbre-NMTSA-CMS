@@ -5,8 +5,7 @@ from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
-from .components.ContentPanelBlock import QualifiedCharitableBlock, CorporateSponsorsBlock
-
+from .components.ContentPanelBlock import QualifiedCharitableBlock
 class HomePage(Page):
     image = models.ForeignKey(
         "wagtailimages.Image",
@@ -41,7 +40,6 @@ class HomePage(Page):
 
     panels = StreamField([
         ('qualified_charitable', QualifiedCharitableBlock()),
-        ('corporate_sponsors', CorporateSponsorsBlock()),
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
