@@ -345,3 +345,4 @@ cython_debug/
 
 db.sqlite3
 >>>>>>> Stashed changes
+nmtsa_cms/db.sqlite3.old
