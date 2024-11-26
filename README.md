@@ -1,5 +1,5 @@
 
-# 2024_fall Hackathon Project
+#NMTSA_CMS
 
 ## Quick Links
 - [Hackathon Details](https://www.ohack.dev/hack/2024_fall)
@@ -30,10 +30,12 @@ Brief description of your project and its goals.
 
 ## Setup Instructions
 ```bash
-git clone https://github.com/opportunity-hack/event-registration.git
-python -m venv cognitive-timbre-venv
-cd Cognitive-Timbre-NMTSA-CMS/nmtsa_cms
+git clone https://github.com/2024-Arizona-Opportunity-Hack/Cognitive-Timbre-NMTSA-CMS.git
+python -m venv env
+./source env/bin/activate
+cd nmtsa_cms/nmtsa_cms
 pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver
 ```
 

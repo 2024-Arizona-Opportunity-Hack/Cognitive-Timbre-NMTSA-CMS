@@ -22,13 +22,12 @@ body {
     left: 20%;
     right: 20%;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(174, 166, 166, 0.201);
     padding: 10px 20px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 100px;
 }
 
 .nav-container .logo a {
@@ -42,9 +41,40 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 30px;
-    justify-items: center;
     align-items: center;
-    margin-top: 12px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}/* Floating Navbar */
+.nav-container {
+    position: fixed;
+    top: 2%;
+    left: 20%;
+    right: 20%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 
 nav ul li a {
@@ -68,7 +98,8 @@ nav ul li a {
 
 /* Home Container */
 .home-container {
-    background-color: rgba(0, 0, 0, 0.3);
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;
 }
@@ -86,25 +117,23 @@ nav ul li a {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top:80px;
 }
 
 .hero-image img {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     height: auto;
     border-radius: 10px;
 }
 
 .hero-text {
     max-width: 50%;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .hero-text h1 {
     font-size: 2.5rem;
     font-weight: bold;
-    /* box-shadow: 10px 5px 5px black; */
 }
 
 .hero-cta {
@@ -122,14 +151,6 @@ nav ul li a {
     background-color: #e65c3e;
 }
 
-.content {
-    font-size: 24px;
-    margin-left: 20px;
-    margin-right:20px;
-    justify-content: center;
-    text-align: center;
-}
-
 /* Panels Section */
 .panels {
     display: flex;
@@ -137,10 +158,6 @@ nav ul li a {
     gap: 20px;
     justify-content: space-around;
     margin: 40px 0;
-}
-
-.panels p, h2 {
-    color: black;
 }
 
 .content-panel {
@@ -174,7 +191,7 @@ nav ul li a {
 .contact-section {
     margin: 40px 0;
     padding: 20px;
-    background-color: #462222;
+    background-color: #222;
     border-radius: 10px;
     color: white;
 }
@@ -182,7 +199,6 @@ nav ul li a {
 .contact-section h2 {
     margin-bottom: 20px;
     font-size: 2.5rem;
-    color: white;
 }
 
 .contact-form .form-group {
@@ -212,73 +228,21 @@ nav ul li a {
 }
 
 
-/* Footer Styling */
-footer {
-    background-color: #4e3b31; /* Dark brown background for contrast */
-    color: #fff; /* White text for readability */
-    padding: 40px 0; /* Spacing to create a well-structured footer */
+ul, ol {
+  padding-left: 40px;  /* Move the bullets to the right */
+  margin-bottom: 1.5rem; /* Add some space at the bottom */
 }
 
-.footer-container {
-    display: flex;
-    justify-content: space-between; /* Space out logo and info evenly */
-    align-items: center;
-    max-width: 1200px; /* Max width for better centering on larger screens */
-    margin: 0 auto; /* Center container */
-    padding: 0 20px; /* Responsive padding */
+.hide-paragraph{
+    display: none;
 }
 
-.footer-logo {
-    font-size: 1.8rem;
+.block-heading{
+    font-size: 1.5rem;
     font-weight: bold;
-}
-
-.footer-logo a {
-    color: #ff7a45; /* Accent color to match the rest of the design */
-    text-decoration: none;
-}
-
-.footer-logo a:hover {
-    color: #ffa85c; /* Lighter hover color */
-}
-
-.footer-info {
-    display: flex;
-    gap: 50px; /* Space between location and contact sections */
-}
-
-.footer-info h4 {
-    font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
-.footer-info ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-info ul li {
-    margin-bottom: 10px;
-}
-
-.footer-info ul li a {
-    text-decoration: none;
-    color: #fff; /* White links */
-    font-size: 1rem;
-}
-
-.footer-info ul li a:hover {
-    color: #ff7a45; /* Accent color on hover */
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center; /* Center text on smaller screens */
-    }
-
-    .footer-info {
-        flex-direction: column;
-        gap: 20px; /* Reduce gap for smaller screens */
-    }
+.my-5 h1{
+  padding-top: 10%;
 }
