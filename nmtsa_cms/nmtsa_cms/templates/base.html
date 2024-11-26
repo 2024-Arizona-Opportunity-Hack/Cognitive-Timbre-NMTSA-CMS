@@ -26,7 +26,7 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body style="background-color: #f9c6a8">
         {% block navigation%}{% endblock navigation%}
         {% include 'includes/navigation.html' %}
 
@@ -42,19 +42,5 @@
         {% block extra_js %}
         {% endblock %} 
     </body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const nestedContentBlocks = document.querySelectorAll('.nested-content-block');
-        
-            nestedContentBlocks.forEach(block => {
-                const parent = block.parentElement;
-                const children = Array.from(block.children);
-        
-                // Move all children up to the parent's level, then remove the original nested content block div
-                children.forEach(child => parent.insertBefore(child, block));
-                parent.removeChild(block);
-            });
-        });
-        </script>
         
 </html>

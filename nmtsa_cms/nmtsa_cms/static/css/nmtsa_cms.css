@@ -22,6 +22,39 @@ body {
     left: 20%;
     right: 20%;
     z-index: 1000;
+    background-color: rgba(174, 166, 166, 0.201);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}/* Floating Navbar */
+.nav-container {
+    position: fixed;
+    top: 2%;
+    left: 20%;
+    right: 20%;
+    z-index: 1000;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px 20px;
     border-radius: 20px;
@@ -192,4 +225,24 @@ nav ul li a {
 
 .contact-form button:hover {
     background-color: #e65c3e;
+}
+
+
+ul, ol {
+  padding-left: 40px;  /* Move the bullets to the right */
+  margin-bottom: 1.5rem; /* Add some space at the bottom */
+}
+
+.hide-paragraph{
+    display: none;
+}
+
+.block-heading{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.my-5 h1{
+  padding-top: 10%;
 }
