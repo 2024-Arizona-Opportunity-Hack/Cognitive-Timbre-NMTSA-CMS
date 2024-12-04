@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailuserbar wagtailimages_tags %}
+
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+
+    <!-- Home Container with Semi-Transparent Background -->
+    <div class="home-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <!-- Guitar Image -->
+                {% if page.image %}
+                <div class="hero-image">
+                    {% image page.image fill-480x320 as hero_img %}
+                    <img src="{{ hero_img.url }}" alt="Guitar Image" class="img-fluid">
+                </div>
+                {% endif %}
+                <!-- Text Content -->
+                <div class="hero-text">
+                    <h1>Neurologic Music Therapy Services of Arizona</h1>
+                    {% if page.hero_cta_link %}
+                        <a href="{% pageurl page.hero_cta_link %}" class="hero-cta">
+                            {% firstof page.hero_cta page.hero_cta_link.title %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Body Content -->
+        <div class="content">
+            {{ page.body|richtext }}
+        </div>
+
+        <!-- Panels Section -->
+        <div class="panels">
+            {% for block in page.panels %}
+                <div class="content-panel">
+                    <h2>{{ block.value.title }}</h2>
+                    {% if block.value.image %}
+                        {% image block.value.image fill-480x320 as img %}
+                        <img src="{{ img.url }}" alt="{{ block.value.title }}">
+                    {% endif %}
+                    <p>{{ block.value.description|richtext }}</p>
+
+                    {% if block.value.cta_text and block.value.cta_link %}
+                        <a href="{{ block.value.cta_link.url }}" class="btn">{{ block.value.cta_text }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Contact Us Section -->
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <p>Interested in working together? Fill out some info and we will be in touch shortly.</p>
+
+
+            <form method="GET" class="contact-form">
+                <div class="form-group">
+                    <label for="first-name">First Name (required)</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name (required)</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email (required)</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message (required)</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Send</button>
+                </div>
+            </form>
+        </div>
+{% endblock content %}

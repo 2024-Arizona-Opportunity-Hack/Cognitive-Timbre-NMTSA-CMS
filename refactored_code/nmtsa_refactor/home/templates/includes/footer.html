@@ -1,0 +1,38 @@
+{% load static navbar_tags %}
+{% get_navbar_pages as navbar_pages %}
+
+<footer>
+    <div class="footer-container">
+        <!-- Logo on the left -->
+        <div class="footer-logo">
+            <a href="/"><strong>NMTSA</strong></a>
+        </div>
+
+        <!-- Footer navigation for address and contact info -->
+        <div class="footer-info">
+            <div class="footer-location">
+                <h4>Location</h4>
+                <!-- Dynamically fetch the address page -->
+                <ul>
+                    {% for page in navbar_pages %}
+                        {% if page.title == "Location" %}
+                            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <!-- Dynamically fetch the contact page -->
+                <ul>
+                    {% for page in navbar_pages %}
+                        {% if page.title == "Contact Us" %}
+                            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

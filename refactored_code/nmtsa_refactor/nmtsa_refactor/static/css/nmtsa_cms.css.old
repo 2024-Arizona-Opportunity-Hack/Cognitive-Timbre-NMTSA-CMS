@@ -1,0 +1,284 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Background */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f9c6a8;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+/* Floating Navbar */
+.nav-container {
+    position: fixed;
+    top: 2%;
+    left: 20%;
+    right: 20%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.nav-container .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+
+.book-now-btn {
+    background-color: #ff7a45;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.book-now-btn:hover {
+    opacity: 0.9;
+}
+
+/* Home Container */
+.home-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top:80px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.hero-text {
+    max-width: 50%;
+    padding-left: 10px;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* box-shadow: 10px 5px 5px black; */
+}
+
+.hero-cta {
+    display: inline-block;
+    background-color: #ff7a45;
+    padding: 15px 40px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    border-radius: 50px;
+}
+
+.hero-cta:hover {
+    background-color: #e65c3e;
+}
+
+.content {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right:20px;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Panels Section */
+.panels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin: 40px 0;
+}
+
+.panels p, h2 {
+    color: black;
+}
+
+.content-panel {
+    background-color: white;
+    border-radius: 10px;
+    width: 30%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.content-panel:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.content-panel img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.content-panel h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Contact Section */
+.contact-section {
+    margin: 40px 0;
+    padding: 20px;
+    background-color: #462222;
+    border-radius: 10px;
+    color: white;
+}
+
+.contact-section h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.contact-form button {
+    background-color: #ff7a45;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #e65c3e;
+}
+
+
+/* Footer Styling */
+footer {
+    background-color: #4e3b31; /* Dark brown background for contrast */
+    color: #fff; /* White text for readability */
+    padding: 40px 0; /* Spacing to create a well-structured footer */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Space out logo and info evenly */
+    align-items: center;
+    max-width: 1200px; /* Max width for better centering on larger screens */
+    margin: 0 auto; /* Center container */
+    padding: 0 20px; /* Responsive padding */
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.footer-logo a {
+    color: #ff7a45; /* Accent color to match the rest of the design */
+    text-decoration: none;
+}
+
+.footer-logo a:hover {
+    color: #ffa85c; /* Lighter hover color */
+}
+
+.footer-info {
+    display: flex;
+    gap: 50px; /* Space between location and contact sections */
+}
+
+.footer-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.footer-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-info ul li {
+    margin-bottom: 10px;
+}
+
+.footer-info ul li a {
+    text-decoration: none;
+    color: #fff; /* White links */
+    font-size: 1rem;
+}
+
+.footer-info ul li a:hover {
+    color: #ff7a45; /* Accent color on hover */
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center; /* Center text on smaller screens */
+    }
+
+    .footer-info {
+        flex-direction: column;
+        gap: 20px; /* Reduce gap for smaller screens */
+    }
+}
