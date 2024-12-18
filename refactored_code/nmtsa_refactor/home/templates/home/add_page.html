@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailuserbar wagtailimages_tags %}
+
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+
+<div class="home-container">
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.intro }}</p>
+
+    <div class="dynamic-sections">
+        {% for block in page.body %}
+
+            {% if block.block_type == "text" %}
+                <div class="text-block">
+                    <h2>{{ block.value|richtext }}</h2>
+                </div>
+
+            {% elif block.block_type == "image" %}
+                <div class="image-block">
+                    <img src="{{ block.value.image.url }}" alt="{{ block.value.caption }}">
+                </div>
+
+            {% elif block.block_type == "content" %}
+                <div class="nested-content-block">
+                    {% for nested_block in block.value %}
+                        {% include_block nested_block %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
