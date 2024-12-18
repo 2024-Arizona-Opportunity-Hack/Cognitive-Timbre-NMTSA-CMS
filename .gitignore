@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # yt-dlp downloads
 content/
 export*.json
@@ -173,7 +172,6 @@ cython_debug/
 db.sqlite3
 
 nmtsa*.json
-=======
 # yt-dlp downloads
 content/
 
@@ -344,5 +342,4 @@ cython_debug/
 .DS_Store
 
 db.sqlite3
->>>>>>> Stashed changes
 nmtsa_cms/db.sqlite3.old
