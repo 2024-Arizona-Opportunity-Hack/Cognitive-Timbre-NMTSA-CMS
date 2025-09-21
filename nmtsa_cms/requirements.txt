@@ -30,3 +30,5 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 wagtail==6.2.2
 Willow==1.8.0
+wagtail==6.2.4
+django==4.2.24
